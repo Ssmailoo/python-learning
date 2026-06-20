@@ -26,11 +26,11 @@ Satu catatan penting:
     
 ## Expanse Tracker versi 2
 
-    Di versi 2 ini saya mulai membuat program yang bisa di input oleh user, saya pertama kali belajar tentang CSV kapan menggunakan 'r', 'w', DictWriter, DIctReader dan kegunaannya masing- masing.
-    saya juga mengubah beberapa input dari user,
+Di versi 2 ini saya mulai membuat program yang bisa di input oleh user, saya pertama kali belajar tentang CSV kapan menggunakan 'r', 'w', DictWriter, DIctReader dan kegunaannya masing- masing.
+saya juga mengubah beberapa input dari user,
 
-    Saya mempelajari ini lumayan makan waktu, tapi banyka hal juga yang bisa menambah wawasan saya, semakin saya banyak mengetahui hal, semakin itu makin menyenangkan.
+Saya mempelajari ini lumayan makan waktu, tapi banyka hal juga yang bisa menambah wawasan saya, semakin saya banyak mengetahui hal, semakin itu makin menyenangkan.
 
 ## Expanse Tracker versi 3
 
-    Versi 3 ini banyak berhubungan dengan error handling, mencari error dimana ketika pengguna mengetik huruf pada menu "Pilih menu" itu akan mengalami error, saya saya merubah program sedikit dengan metode error handlinh( try and except)
+Versi 3 ini banyak berhubungan dengan error handling, mencari error dimana ketika pengguna mengetik huruf pada menu "Pilih menu" itu akan mengalami error, saya saya merubah program sedikit dengan metode error handlinh( try and except)
