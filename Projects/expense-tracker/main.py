@@ -20,10 +20,27 @@ else:
 
 import csv
 import os
+from datetime import datetime
 
-def expanse():
+NAMA_BULAN = {
+    1:"Januari",
+    2:"Februari",
+    3:"Maret",
+    4:"April",
+    5:"Mei",
+    6:"Juni",
+    7:"Juli",
+    8:"Agustus",
+    9:"September",
+    10:"Oktober",
+    11:"November",
+    12:"Desember"
+}
+pengeluaran = []
+
+def expense():
     while True:
-        print("\n=== Expanse Tracker ===")
+        print("\n=== Expense Tracker ===")
         print("1. Tambah Pengeluaran")
         print("2. Lihat Pengeluaran")
         print("3. Total per Kategori")
@@ -67,29 +84,41 @@ def expanse():
             → Menyimpan data dan menutup aplikasi.
 
             Catatan:
-            - Data akan disimpan ke file "expanse tracker.csv".
+            - Data akan disimpan ke file "expenses.csv".
             - Saat aplikasi dibuka kembali, data lama akan dimuat otomatis dari file CSV.""")
 
 
         else:
             print("Pilihan tidak valid")
 
-pengeluaran = []
-
 def tambah_pengeluaran():
-    nama = input("masukkan nama: ")
+    while True:
+        nama = input("masukkan nama: ")
+        if nama == "":
+            print("Nama tidak boleh kosong")
+        else:
+            break
     while True:
         try:
             jumlah = int(input("Masukkan jumlah: "))
-            break
+            if jumlah <= 0:
+                print("Jumlah harus lebih dari 0")
+            else:
+                break
         except ValueError:
             print("Masukkan Angka")
     kategori = input("masukkan kategori: ")
 
+    day = datetime.now().day
+    month = datetime.now().month
+    year = datetime.now().year
+    tanggal = (f"{day} {NAMA_BULAN[month]} {year}")
+
     data = {
         "nama": nama,
         "jumlah": jumlah,
-        "kategori": kategori
+        "kategori": kategori,
+        "tanggal": tanggal
     }
 
     pengeluaran.append(data)
@@ -101,7 +130,7 @@ def lihat_pengeluaran():
 
     else:
         for i in pengeluaran:
-            print(f"Nama: {i['nama']}, Jumlah: {i['jumlah']}, Kategori: {i['kategori']}")
+            print(f"Nama: {i['nama']}, Jumlah: {i['jumlah']}, Kategori: {i['kategori']}, Tanggal: {i['tanggal']}")
 
 def total_per_kategori():
     total = {}
@@ -117,16 +146,17 @@ def total_per_kategori():
     for kategori, jumlah in total.items():
         print(f"Kategori: {kategori}, Jumlah: {jumlah}")
 def simpan_ke_csv():
-    with open("expanse tracker.csv", mode='w') as file:
-        writer = csv.DictWriter(file, fieldnames=["nama", "jumlah", "kategori"])
+    with open("projects/expense-tracker/data/expenses.csv", mode='w') as file:
+        writer = csv.DictWriter(file, fieldnames=["nama", "jumlah", "kategori", "tanggal"])
         writer.writeheader()
         writer.writerows(pengeluaran)
 def muat_dari_csv():
-    if os.path.exists("expanse tracker.csv"):
-        with open("expanse tracker.csv", mode='r') as file:
+    if os.path.exists("projects/expense-tracker/data/expenses.csv"):
+        with open("projects/expense-tracker/data/expenses.csv", mode='r') as file:
             reader = csv.DictReader(file)
             for baris in reader:
                 baris["jumlah"] = int(baris["jumlah"])
                 pengeluaran.append(baris)
-muat_dari_csv()
-expanse()
+if __name__ == "__main__":
+    muat_dari_csv()
+    expense()
