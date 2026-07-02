@@ -20,6 +20,9 @@ class ExpenseManager:
         }
         self.__expenses.append(expense)
 
+    def get_expenses(self):
+        return self.__expenses
+
     def get_total(self):
         total = 0
         for expense in self.__expenses:
@@ -73,3 +76,10 @@ except AttributeError as e:
     print(f"Blocked: {e}")
 
 print(manager)
+
+manager = ExpenseManager()
+manager.add_expense(50000, "food", "nasi goreng")
+manager.add_expense(20000, "transport", "angkot")
+
+# Akses data lewat getter, bukan langsung
+print(manager.get_expenses())
