@@ -8,9 +8,9 @@ class ExpenseManager:
     def add_expense(self, amount, category, description):
         if amount <= 0:
             raise ValueError("Amount must be greater than 0")
-        elif category.strip() == "":
+        if category.strip() == "":
             raise ValueError("Category cannot be empty")
-        elif description.strip() == "":
+        if description.strip() == "":
             raise ValueError("Description cannot be empty")
         
         expense = {
@@ -52,8 +52,9 @@ try:
 except ValueError as e:
     print(f"Error: {e}")
 
-# Test 3 — category berisi spasi
-try:
-    manager.add_expense(50000, "   ", "nasi goreng")
-except ValueError as e:
-    print(f"Error: {e}")
+# Test 3 — expense valid
+manager.add_expense(50000, "food", "nasi goreng")
+print(manager)
+
+manager.add_expense(50000, "   ", "nasi goreng")
+print(manager)
