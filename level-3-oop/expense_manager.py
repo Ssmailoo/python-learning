@@ -3,7 +3,7 @@
 class ExpenseManager:
 
     def __init__(self):
-        self.expenses = []
+        self.__expenses = []
 
     def add_expense(self, amount, category, description):
         if amount <= 0:
@@ -18,23 +18,23 @@ class ExpenseManager:
             "category": category,
             "description": description
         }
-        self.expenses.append(expense)
+        self.__expenses.append(expense)
 
     def get_total(self):
         total = 0
-        for expense in self.expenses:
+        for expense in self.__expenses:
             total += expense["amount"]
         return total
 
     def get_by_category(self, category):
         filtered = []
-        for expense in self.expenses:
+        for expense in self.__expenses:
             if expense["category"] == category:
                 filtered.append(expense)
         return filtered
     
     def __str__(self):
-        total_expense = len(self.expenses)
+        total_expense = len(self.__expenses)
         total = self.get_total()
         return f"{total_expense} expenses, Total: Rp{total}"
     
@@ -57,3 +57,19 @@ try:
     manager.add_expense(50000, "   ", "nasi goreng")
 except ValueError as e:
     print(f"Error: {e}")
+
+manager.add_expense(50000, "food", "nasi goreng")
+
+# Coba lewat pintu resmi dengan data rusak
+try:
+    manager.add_expense(-99999, "", "")
+except ValueError as e:
+    print(f"Blocked: {e}")
+
+# Coba akses langsung dari luar
+try:
+    manager.__expenses.append({"amount": -99999, "category": "", "description": ""})
+except AttributeError as e:
+    print(f"Blocked: {e}")
+
+print(manager)
